@@ -44,6 +44,9 @@
 //! \ingroup DecoderApp
 //! \{
 
+extern int num_candidate[9];
+extern int num_candidate_mmvd[9];
+
 // ====================================================================================================================
 // Main function
 // ====================================================================================================================
@@ -51,7 +54,12 @@
 int main(int argc, char* argv[])
 {
   int returnCode = EXIT_SUCCESS;
-
+  // print init num_candidate
+  fprintf( stdout, "\n" );
+  for(int i = 0; i < 9; i++) {
+      std::cout << num_candidate[i] << " ";
+  }
+  
   // print information
   fprintf( stdout, "\n" );
   fprintf( stdout, "VVCSoftware: VTM Decoder Version %s ", VTM_VERSION );
@@ -110,6 +118,16 @@ int main(int argc, char* argv[])
   // ending time
   dResult = (double)(clock()-lBefore) / CLOCKS_PER_SEC;
   printf("\n Total Time: %12.3f sec.\n", dResult);
+
+  // print final num_candidate
+  fprintf( stdout, "\n" );
+  for(int i = 0; i < 9; i++) {
+      std::cout << num_candidate[i] << " ";
+  }
+  fprintf( stdout, "\n" );
+  for(int i = 0; i < 9; i++) {
+      std::cout << num_candidate_mmvd[i] << " ";
+  }
 
   delete pcDecApp;
 

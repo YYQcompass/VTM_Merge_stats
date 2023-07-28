@@ -54,6 +54,9 @@
 
 //! \ingroup DecoderLib
 //! \{
+// declare num_candidate
+extern int num_candidate[9];
+extern int num_candidate_mmvd[9];
 
 // ====================================================================================================================
 // Constructor / destructor / create / destroy
@@ -873,6 +876,7 @@ void DecCu::xDeriveCUMV( CodingUnit &cu )
 
         int   fPosBaseIdx = pu.mmvdMergeIdx / MMVD_MAX_REFINE_NUM;
         PU::getInterMergeCandidates(pu, mrgCtx, 1, fPosBaseIdx + 1);
+        num_candidate_mmvd[mrgCtx.candidate_position-1]+=1;
         PU::getInterMMVDMergeCandidates(pu, mrgCtx,
           pu.mmvdMergeIdx
         );
@@ -930,6 +934,7 @@ void DecCu::xDeriveCUMV( CodingUnit &cu )
             PU::getIBCMergeCandidates(pu, mrgCtx, pu.mergeIdx);
           else
             PU::getInterMergeCandidates(pu, mrgCtx, 0, pu.mergeIdx);
+            num_candidate[mrgCtx.candidate_position-1]+=1;
           mrgCtx.setMergeInfo( pu, pu.mergeIdx );
 
           PU::spanMotionInfo( pu, mrgCtx );
@@ -1051,4 +1056,8 @@ void DecCu::xDeriveCUMV( CodingUnit &cu )
     }
   }
 }
+
+int num_candidate[9] = {0,0,0,0,0,0,0,0,0};
+int num_candidate_mmvd[9] = {0,0,0,0,0,0,0,0,0};
+
 //! \}
